@@ -1,7 +1,7 @@
 import dao
 
 while True:
-    text = input('My-Own-Langage > ')
+    text = input('Dao > ')
     result, error = dao.run('<stdin>', text)
 
     if error: print(error.as_string())
