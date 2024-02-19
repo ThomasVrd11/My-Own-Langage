@@ -1,4 +1,4 @@
-expression      : term ((PLUS|MINUS) term)*
+expr            : term ((PLUS|MINUS) term)*
 
 term            : factor ((MUL|DIV) factor)*
 
