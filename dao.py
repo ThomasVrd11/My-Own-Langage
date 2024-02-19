@@ -194,6 +194,7 @@ class Parser:
             op_tok = self.current_tok
             right = func()
             left = BinOpNode(left, op_tok, right)
+        return left
 #######################################
 # RUN
 #######################################
