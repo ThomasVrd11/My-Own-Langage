@@ -183,7 +183,13 @@ class Parser:
             return NumberNode(tok)
     
     def term(self):
-        return self.bin_op(self.factor, (TT_MUL, TT_DIV))
+        left = self.factor()
+        while self.current_tok.type in (TT_MUL, TT_DIV):
+            op_tok = self.current_tok
+            right = self.factor()
+            left = BinOpNode(left, op_tok, right)
+        return left
+    
 #######################################
 # RUN
 #######################################
