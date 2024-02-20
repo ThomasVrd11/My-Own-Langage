@@ -3,6 +3,9 @@ expr            : term ((PLUS|MINUS) term)*
 term            : factor ((MUL|DIV) factor)*
 factor          : INT|FLOAT
 
+VAR             variable_name           =           (expr)
+keyword             identifier          equals          
+
 ################################# dao.py ###############################
 
 1. **`Error` Class**: This foundational class represents errors that can occur within the interpreter. It includes the error's type, a detailed message, and the position in the source code where the error was detected, providing a framework for reporting errors in a structured way.
