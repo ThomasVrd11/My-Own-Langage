@@ -49,55 +49,65 @@ Dao > FALSE
 
 ################################# dao.py ###############################
 
-1. **`Error` Class**: Defines a generic error, including start and end positions, an error name, and detailed message. Useful for reporting errors with specific information about their occurrence in the source code.
+1. **`Error` Class**: Base class for errors, encapsulating error information such as location (start and end positions), name, and detailed message, crucial for precise error reporting within the language.
 
-2. **`IllegalCharError` Class**: Specialized error for handling illegal characters in the source code, inheriting from the `Error` class and providing a specific error name ('Illegal Character').
+2. **`IllegalCharError` Class**: Inherits from `Error`, specifically designed to report instances where the lexer encounters characters that are not recognized within the language's syntax, indicating potential typos or unsupported operations.
 
-3. **`InvalidSyntaxError` Class**: Represents syntax-related errors in the code, extending the `Error` class to provide syntax-specific error messages.
+3. **`ExpectedCharError` Class**: Extends the `Error` class to handle scenarios where a specific character was anticipated by the parser (like a closing parenthesis or an operator) but was not found in the input stream, aiding in pinpointing syntax mistakes.
 
-4. **`RTError` Class**: Captures runtime errors that occur during the execution of the program, including the context in which the error happened, and supports generating a traceback for debugging.
+4. **`InvalidSyntaxError` Class**: Specialized error class derived from `Error` for flagging violations of the language's syntax rules during parsing, such as incorrect statement structure or improper use of keywords.
 
-5. **`Position` Class**: Tracks the position within the source code being interpreted, including index, line, column, file name, and the entire file text, useful for pinpointing error locations and token positioning.
+5. **`RTError` Class**: Represents runtime errors that occur during the execution phase of the language. It includes additional context information to facilitate tracing the error back through the executed code, enhancing debuggability.
 
-6. **`Token` Class**: Represents the smallest units of meaningful text (like numbers, operators, and identifiers), including type, value, and position, serving as the building blocks for parsing.
+6. **`Position` Class**: Utility class that tracks the position within the source code, including the current index, line, column, and filename, as well as the full text being parsed. This is essential for accurate error localization and token positioning.
 
-7. **`Lexer` Class**: Processes the input text to produce a list of tokens, handling different types of characters and sequences as defined by the language's syntax.
+7. **`Token` Class**: Represents the fundamental units of the language's syntax as identified by the lexer, categorized by type (such as integer, identifier, operator) and value, with associated position information for precise syntactic analysis.
 
-8. **`make_tokens` Method**: Within `Lexer`, this method iterates over the input text, categorizing segments into tokens based on the language's lexical rules.
+8. **`Lexer` Class**: Analyzes the input source code text character by character, converting it into a sequence of tokens based on the language's lexical grammar, handling numbers, identifiers, keywords, and a variety of operators.
 
-9. **`make_number` Method**: A `Lexer` utility for parsing numbers (integers and floats) from the text, handling the accumulation of digits and decimal points.
+9. **`make_tokens` Method**: Core function of the `Lexer` class that iterates through the input text, systematically categorizing segments into tokens according to their syntactic role, such as numeric literals, operators, or identifiers.
 
-10. **`make_identifier` Method**: Identifies and creates tokens for identifiers (like variable names) and keywords by accumulating letter and digit characters.
+10. **`make_number` Method**: Dedicated method within the `Lexer` for parsing numerical literals, accurately distinguishing between integer and floating-point numbers based on the presence of a decimal point.
 
-11. **`NumberNode` Class**: A node in the AST representing numeric literals, holding a token for the number and its position.
+11. **`make_identifier` Method**: Lexer method responsible for identifying and tokenizing identifiers, which can represent variable names or keywords, based on the sequence of letter and digit characters.
 
-12. **`VarAccessNode` Class**: Represents access to a variable in the AST, containing a token for the variable name and its position.
+12. **`make_not_equals` Method**: Enhances the `Lexer` by adding the capability to recognize the inequality operator ('!='), enriching the language's set of comparison operations.
 
-13. **`VarAssignNode` Class**: Represents variable assignment in the AST, holding tokens for the variable name and the value assigned to it, along with their positions.
+13. **`make_equals` Method**: Function within the `Lexer` that discerns between the assignment operator ('=') and the equality comparison operator ('=='), based on the context and presence of consecutive equals signs.
 
-14. **`BinOpNode` Class**: Represents binary operations (like addition, subtraction) in the AST, with nodes for the left and right operands and the operation token.
+14. **`make_less_than` and `make_greater_than` Methods**: Extend the `Lexer`'s functionality to include less-than ('<', '<=') and greater-than ('>', '>=') comparison operators, broadening the language's comparative logic.
 
-15. **`UnaryOpNode` Class**: Represents unary operations (like negation) in the AST with a single operand node and the operation token.
+15. **`NumberNode` Class**: Node type in the Abstract Syntax Tree (AST) representing numeric literals, encapsulating the corresponding token and its position within the source code.
 
-16. **`ParseResult` Class**: Used by the parser to encapsulate the result of parsing operations, including any errors and the node produced.
+16. **`VarAccessNode` Class**: AST node type for variable access expressions, holding the token for the variable name, facilitating the retrieval of variable values during interpretation.
 
-17. **`Parser` Class**: Takes a list of tokens and constructs an AST by applying the grammar rules of the language.
+17. **`VarAssignNode` Class**: Represents variable assignment operations in the AST, linking a variable name token to a value node, enabling the assignment of values to variables in the language's runtime environment.
 
-18. **`atom`, `power`, `factor`, `term`, `expr` Methods**: These parsing functions within `Parser` implement the grammar rules for expressions, organizing tokens into an AST.
+18. **`BinOpNode` Class**: AST node for binary operations, encapsulating the left operand, operator token, and right operand, supporting arithmetic, comparison, and logical operations within the language's expressions.
 
-19. **`bin_op` Method**: A utility method for handling binary operations in the parsing process, abstracting common logic to reduce redundancy.
+19. **`UnaryOpNode` Class**: Denotes unary operations in the AST, such as negation or logical NOT, with a single operand node and the operator token, expanding the language's expressiveness in manipulating values.
 
-20. **`RTResult` Class**: Manages the result of runtime operations during interpretation, holding the value produced or any errors.
+20. **`ParseResult` Class**: Used within the parsing process to encapsulate the outcome, holding either the successfully parsed node or an encountered error, along with a count of advancements made during parsing, aiding in error handling and recovery.
 
-21. **`Number` Class**: Represents numeric values during interpretation, supporting arithmetic operations and setting the execution context and position.
+21. **`Parser` Class**: Transforms the stream of tokens generated by the lexer into a structured AST based on the language's grammar, implementing parsing logic for expressions, variable assignments, and logical structures.
 
-22. **`Context` Class**: Maintains the execution context, like the current function or program scope, and holds a symbol table for variable tracking.
+22. **`atom`, `power`, `factor`, `term`, `arith_expr`, `comp_expr`, `expr` Methods**: Constituent parsing functions within the `Parser` class, each handling different levels of expression complexity, from basic arithmetic to comparison and logical operations, structuring the language's grammar into a parseable hierarchy.
 
-23. **`SymbolTable` Class**: Stores and manages symbols (like variables) and their values within a given context, supporting variable lookup, assignment, and deletion.
+23. **`bin_op` Method**: General-purpose method in the `Parser` for
 
-24. **`Interpreter` Class**: Visits each node in the AST to evaluate the program, performing operations defined by the nodes and producing a result.
+ parsing binary operations, utilizing a common pattern to reduce redundancy in handling various types of binary expressions.
 
-25. **`run` Function**: Coordinates the entire process from lexing to interpretation, setting up a global symbol table and executing the program, returning the result or any errors encountered.
+24. **`RTResult` Class**: Manages the outcome of runtime evaluations, encapsulating either the resulting value of an expression or any runtime error that occurred, ensuring a clear distinction between successful execution and error states.
+
+25. **`Number` Class**: Represents numerical values within the language's runtime, equipped with methods for performing arithmetic, comparison, and logical operations, integral to the language's capability to evaluate complex expressions.
+
+26. **`Context` Class**: Captures the execution context in which code is evaluated, including the current scope's symbol table and references to parent contexts, critical for maintaining variable scope and function call contexts.
+
+27. **`SymbolTable` Class**: Maintains a mapping of variable names to their values within a given execution context, supporting variable declaration, assignment, and lookup operations, essential for the language's variable management.
+
+28. **`Interpreter` Class**: Executes the AST generated by the parser, visiting each node and performing the corresponding operations, from variable assignments to evaluating expressions, driving the language's runtime behavior.
+
+29. **`run` Function**: The main entry point that orchestrates the entire process of lexing, parsing, and interpreting the source code, leveraging a global symbol table to maintain predefined values and variables, and returning the final result or any encountered errors.
 
                 ###################################
 
