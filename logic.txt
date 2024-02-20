@@ -1,10 +1,17 @@
 ####### grammar ########
-expr            : term ((PLUS|MINUS) term)*
-term            : factor ((MUL|DIV) factor)*
-factor          : INT|FLOAT
+expr            : KEYWORD:VAR IDENTIFIER EQUAL expr
+                : term ((PLUS|MINUS)term)*
+term            : factor ((MUL|DIV)factor)*
+factor          : (PLUS|MINUS) factor
+                : power
+power           : atom (POW factor)*
+atom            : INT|FLOAT|IDENTIFIER
+                : LPAREN expr RPAREN
 
-VAR             variable_name           =           (expr)
-keyword             identifier          equals          
+VAR variable_name = (expr)
+keyword identifier equals
+
+
 
 ################################# dao.py ###############################
 
