@@ -28,6 +28,23 @@ Dao > e
 12
 Dao > l
 12
+####### input comparisons examples 
+Dao > 4 == 4
+1
+Dao > 4 == 3
+0
+Dao > 2 < 1
+0
+Dao > 2 + 6 == 4 * 2
+1
+Dao > 1 == 1 AND 2 == 2
+1
+Dao > NULL
+0
+Dao > TRUE
+1
+Dao > FALSE
+0
 #######
 
 ################################# dao.py ###############################
