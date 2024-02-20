@@ -4,5 +4,7 @@ while True:
     text = input('Dao > ')
     result, error = dao.run('<stdin>', text)
 
-    if error: print(error.as_string())
-    else: print(result)
+    if error:
+        print(error.as_string())
+    else:
+        print(result)
