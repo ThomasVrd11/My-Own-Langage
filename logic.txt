@@ -5,52 +5,47 @@ factor          : INT|FLOAT
 
 ################################# dao.py ###############################
 
-Here's a brief explanation of each class and function in the provided code, following the order they appear:
+1. **`Error` Class**: This foundational class represents errors that can occur within the interpreter. It includes the error's type, a detailed message, and the position in the source code where the error was detected, providing a framework for reporting errors in a structured way.
 
-1. **`Error` Class**: Represents a generic error with a name, location, and details.
+2. **`IllegalCharError` Class**: Derived from the `Error` class, this specifies errors caused by characters in the source code that are not recognized by the language's grammar, such as unsupported symbols or punctuation.
 
-2. **`IllegalCharError` Class**: Specifies an error for illegal or unexpected characters in the input.
+3. **`InvalidSyntaxError` Class**: This class represents errors that occur when the code violates the syntactic rules of the language, such as missing operators, unmatched parentheses, or incorrect statement structures.
 
-3. **`InvalidSyntaxError` Class**: Indicates an error due to syntax that doesn't conform to the language's rules.
+4. **`RTError` Class**: Stands for "Runtime Error" and captures errors that occur during the execution of the program, such as division by zero or accessing undefined variables. It includes context to help trace the error back to its source in the code.
 
-4. **`RTError` Class**: Captures runtime errors, including their context for better error tracking.
+5. **`Position` Class**: Keeps track of the current position in the source code being processed, including the index in the text, the current line, and column numbers, as well as the filename and the full text for reference. This is crucial for error reporting and token positioning.
 
-5. **`Position` Class**: Manages the position within the source code, tracking line and column numbers.
+6. **`Token` Class**: Represents the basic building blocks of the language, created by the lexer. Each token has a type (such as integer, operator, parenthesis) and optionally a value (like the specific number for an integer token). Tokens also carry their position in the source code for error tracking.
 
-6. **`Token` Class**: Represents a syntactic token with a type, value, and positional information.
+7. **`Lexer` Class**: Analyzes the input source code text character by character to produce a list of tokens. It categorizes segments of text according to the language's rules, effectively breaking down the code into manageable pieces for parsing.
 
-7. **`Lexer` Class**: Analyzes the source code text and converts it into a list of tokens.
+8. **`make_tokens` Method**: Within the `Lexer` class, this method iterates over the source text, converting it into tokens based on their syntactic role, and handles whitespace and unrecognized characters gracefully.
 
+9. **`make_number` Method**: A specialized lexer method for parsing numbers, including integers and floats. It accumulates digits and decimal points to construct numeric tokens, taking care to handle the decimal point correctly.
 
-8. **`make_tokens` Method**: Generates tokens from the source code by categorizing characters and sequences.
+10. **`NumberNode` Class**: In the AST, this node represents literal numbers. It holds a token corresponding to the number and is used in the tree to represent numeric values in expressions.
 
-9. **`make_number` Method**: Handles the creation of number tokens, detecting integers and floats.
+11. **`BinOpNode` Class**: Represents binary operations in the AST, such as addition or multiplication, with child nodes for the left and right operands and the operation itself, reflecting the structure of expressions like `a + b`.
 
-10. **`NumberNode` Class**: Represents numeric literals in the abstract syntax tree (AST).
+12. **`UnaryOpNode` Class**: Represents unary operations, which have a single operand, such as negation. It includes the operator and a child node for the operand, capturing operations like `-a`.
 
-11. **`BinOpNode` Class**: Represents binary operations (like addition, subtraction) in the AST with two operands.
+13. **`ParseResult` Class**: Used by the parser to encapsulate the outcome of parsing operations. It can hold either a successfully parsed node or an error, providing a mechanism for error propagation during parsing.
 
-12. **`UnaryOpNode` Class**: Represents unary operations (like negation) in the AST with a single operand.
+14. **`Parser` Class**: Takes the list of tokens produced by the lexer and constructs an AST by applying the language's grammar rules. It organizes tokens into a hierarchical structure that represents the program's syntax.
 
-13. **`ParseResult` Class**: Used by the parser to manage the result of parsing operations, including errors.
+15. **Parsing Methods (`atom`, `factor`, `term`, `expr`)**: These methods within the `Parser` class implement the grammar of the language, defining how expressions are broken down into their components and structured in the AST.
 
-14. **`Parser` Class**: Parses a sequence of tokens into an AST based on the language's grammar.
+16. **`bin_op` Method**: A utility method in the parser for handling binary operations, abstracting common logic for parsing expressions with binary operators to reduce redundancy.
 
+17. **`RTResult` Class**: Similar to `ParseResult`, but used during interpretation to manage the outcomes of executing AST nodes, including both the execution results and any runtime errors.
 
-15. **`atom`, `factor`, `term`, `expr` Methods**: These parsing functions implement the grammar rules for expressions.
+18. **`Number` Class**: Represents evaluated numeric values during interpretation, providing methods for basic arithmetic operations and enabling the interpreter to execute mathematical expressions.
 
-16. **`bin_op` Method**: A utility method for handling binary operations during parsing.
+19. **`Context` Class**: Maintains the current context of execution, such as the current function or variable scope, providing a runtime environment for executing code and tracking the location in the source code for error reporting.
 
-17. **`RTResult` Class**: Manages the result of runtime operations, handling both values and errors.
+20. **`Interpreter` Class**: Visits each node in the AST and executes its corresponding operation, effectively running the program represented by the AST. It uses visitor patterns to handle different types of nodes.
 
-18. **`Number` Class**: Represents numeric values during interpretation, supporting basic arithmetic operations.
-
-19. **`Context` Class**: Maintains the context of execution, such as the current function or program scope.
-
-20. **`Interpreter` Class**: Visits nodes in the AST to interpret the program and produce a result.
-
-21. **`run` Function**: The entry point for executing the interpreter, coordinating lexing, parsing, and interpretation.
-
+21. **`run` Function**: The main entry point for the interpreter, which coordinates the lexing of the input code into tokens, parsing of tokens into an AST, and finally interpreting the AST to execute the program. It also handles and reports any errors encountered along the way.
 
                 ###################################
 This code forms the core of a simple interpreted programming language, functioning through several key stages: lexing, parsing, interpreting, and error handling.
