@@ -12,6 +12,7 @@ import string
 
 DIGITS = '0123456789'
 LETTERS = string.ascii_letters
+LETTERS_DIGITS = LETTERS + DIGITS
 
 #######################################
 """ ERRORS MANAGEMENT """
@@ -111,6 +112,9 @@ TT_EOF = 'EOF'
 TT_KEYWORD = 'KEYWORD'
 TT_IDENTIFIER = 'IDENTIFIER'
 TT_EQ = 'EQ'
+KEYWORDS = [
+    'VAR'
+]
 
 
 class Token:
@@ -212,6 +216,17 @@ class Lexer:
         else:
             return Token(TT_FLOAT, float(num_str), pos_start, self.pos)
 
+    def make_identifier(self):
+        id_str = ''
+        pos_start = self.pos.copy()
+
+        while self.current_char is not None and self.current_char in LETTERS_DIGITS + '_':
+            id_str += self.current_char
+            self.advance()
+    
+        tok_type = TT_KEYWORD if id_str in KEYWORDS else TT_IDENTIFIER
+        return Token(tok_type, id_str, pos_start, self.pos)
+    
 #######################################
 """ NODES FOR AST """
 #######################################
