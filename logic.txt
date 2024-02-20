@@ -11,7 +11,24 @@ atom            : INT|FLOAT|IDENTIFIER
 VAR variable_name = (expr)
 keyword identifier equals
 
-
+####### input variables examples
+Dao > VAR a = 3
+3
+Dao > VAR b = 12
+12
+Dao > a * b
+36
+Dao > a + (a * b)
+39
+Dao > 4 + (VAR x = 6)
+10
+Dao > VAR e = VAR o = VAR l = 12
+12
+Dao > e
+12
+Dao > l
+12
+#######
 
 ################################# dao.py ###############################
 
