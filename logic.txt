@@ -5,44 +5,67 @@ factor          : INT|FLOAT
 
 ################################# dao.py ###############################
 
-1. **`Error` Class**: Defines a basic error structure with details like position, name, and a message.
-                                    ##
-2. **`IllegalCharError` Class**: Specifies an error for illegal characters found during lexing.
-                                    ##
-3. **`InvalidSyntaxError` Class**: Represents errors related to syntax issues encountered during parsing.
-                                    ##
-4. **`Position` Class**: Tracks the current position in the text being parsed or lexed, including index, line, column, file name, and file text.
-                                    ##
-5. **`Token` Class**: Represents a lexical token with a type, optional value, and positional information.
-                                    ##
-6. **`Lexer` Class**: Analyzes text to produce a list of tokens based on the defined grammar of the language.
-                                    ##
-7. **`make_tokens` Method**: Part of the `Lexer` class, this method goes through the text and categorizes segments into tokens.
-                                    ##
-8. **`make_number` Method**: Within the `Lexer` class, this function handles the creation of number tokens, supporting both integers and floats.
-                                    ##
-9. **`NumberNode` Class**: Represents a node in the Abstract Syntax Tree (AST) for numerical values.
-                                    ##
-10. **`BinOpNode` Class**: Represents a binary operation node in the AST, holding left and right child nodes along with an operator token.
-                                    ##
-11. **`UnaryOpNode` Class**: Represents a unary operation in the AST, holding a single child node and an operator token.
-                                    ##
-12. **`ParseResult` Class**: Used by the parser to hold the result of parsing operations, encapsulating both the node generated and any potential error.
-                                    ##
-13. **`Parser` Class**: Parses a sequence of tokens into an AST based on the language's grammar.
-                                    ##
-14. **`advance` Method (in `Parser`)**: Moves to the next token in the sequence being parsed.
-                                    ##
-15. **`parse` Method**: The entry point for the `Parser`, initiating the parsing process and handling any syntax errors not caught in specific parsing functions.
-                                    ##
-16. **`factor`, `term`, `expr` Methods**: These methods in the `Parser` class implement the grammar rules for expressions, breaking down the parsing process into manageable parts according to the precedence of operations.
-                                    ##
-17. **`bin_op` Method**: A utility method within the `Parser` class to handle binary operations, factoring out common logic for handling expressions.
-                                    ##
-18. **`run` Function**: This function serves as the entry point for executing the interpreter, taking input text and processing it through lexing and parsing stages to either produce an AST or report an error.
+Here's a brief explanation of each class and function in the provided code, following the order they appear:
+
+1. **`Error` Class**: Represents a generic error with a name, location, and details.
+
+2. **`IllegalCharError` Class**: Specifies an error for illegal or unexpected characters in the input.
+
+3. **`InvalidSyntaxError` Class**: Indicates an error due to syntax that doesn't conform to the language's rules.
+
+4. **`RTError` Class**: Captures runtime errors, including their context for better error tracking.
+
+5. **`Position` Class**: Manages the position within the source code, tracking line and column numbers.
+
+6. **`Token` Class**: Represents a syntactic token with a type, value, and positional information.
+
+7. **`Lexer` Class**: Analyzes the source code text and converts it into a list of tokens.
+
+
+8. **`make_tokens` Method**: Generates tokens from the source code by categorizing characters and sequences.
+
+9. **`make_number` Method**: Handles the creation of number tokens, detecting integers and floats.
+
+10. **`NumberNode` Class**: Represents numeric literals in the abstract syntax tree (AST).
+
+11. **`BinOpNode` Class**: Represents binary operations (like addition, subtraction) in the AST with two operands.
+
+12. **`UnaryOpNode` Class**: Represents unary operations (like negation) in the AST with a single operand.
+
+13. **`ParseResult` Class**: Used by the parser to manage the result of parsing operations, including errors.
+
+14. **`Parser` Class**: Parses a sequence of tokens into an AST based on the language's grammar.
+
+
+15. **`atom`, `factor`, `term`, `expr` Methods**: These parsing functions implement the grammar rules for expressions.
+
+16. **`bin_op` Method**: A utility method for handling binary operations during parsing.
+
+17. **`RTResult` Class**: Manages the result of runtime operations, handling both values and errors.
+
+18. **`Number` Class**: Represents numeric values during interpretation, supporting basic arithmetic operations.
+
+19. **`Context` Class**: Maintains the context of execution, such as the current function or program scope.
+
+20. **`Interpreter` Class**: Visits nodes in the AST to interpret the program and produce a result.
+
+21. **`run` Function**: The entry point for executing the interpreter, coordinating lexing, parsing, and interpretation.
+
 
                 ###################################
-This code outlines the foundational structure of a simple shell interpreter for a programming language, encompassing lexing, parsing, and abstract syntax tree (AST) construction. The lexer (Lexer class) analyzes input text, converting it into tokens (numeric values, operators, parentheses) based on predefined rules. Encountered errors, such as illegal characters or invalid syntax, are captured by specific error classes (IllegalCharError, InvalidSyntaxError) and include detailed information about their location. The parser (Parser class) then takes these tokens and constructs an AST, representing the hierarchical structure of the parsed expressions, by applying grammar rules defined through methods like expr, term, and factor. Nodes within the AST (NumberNode, BinOpNode, UnaryOpNode) correspond to numbers, binary operations, and unary operations, respectively. The entire process is initiated by the run function, which ties these components together, facilitating the transition from raw text to a structured representation of the code suitable for further processing or evaluation.
+This code forms the core of a simple interpreted programming language, functioning through several key stages: lexing, parsing, interpreting, and error handling.
+
+1. **Lexing**: The `Lexer` class processes the input text, converting it into a sequence of tokens (`Token` class instances) based on predefined rules (e.g., recognizing numbers, operators). It handles characters one by one, categorizing them into tokens like integers, floats, and arithmetic symbols.
+
+2. **Parsing**: The `Parser` class takes the tokens from the lexer and constructs an Abstract Syntax Tree (AST) by applying the grammar of the language. It organizes tokens into a hierarchical structure that represents the syntactic structure of the code, using nodes (`NumberNode`, `BinOpNode`, `UnaryOpNode`) for literals and operations.
+
+3. **Interpreting**: The `Interpreter` class traverses the AST and evaluates the expressions. It performs the computations defined by the nodes in the AST, effectively running the program represented by the AST.
+
+4. **Error Handling**: Error classes (`Error`, `IllegalCharError`, `InvalidSyntaxError`, `RTError`) are used to represent and report issues encountered during lexing, parsing, and interpreting. They provide detailed information about the nature and location of the error in the source code.
+
+5. **Execution Flow**: The `run` function ties everything together. It invokes the lexer to tokenize the input, the parser to generate the AST from the tokens, and finally, the interpreter to execute the program represented by the AST. Errors at any stage are captured and reported, providing feedback about issues like illegal characters, syntax errors, or runtime problems.
+
+Overall, the code provides a streamlined process for interpreting a simple programming language, from reading and tokenizing the input text to parsing it into an AST and executing it, all while handling errors gracefully.
 
 ########################### dao.py ##################################
                             ##
