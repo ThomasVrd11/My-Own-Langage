@@ -96,7 +96,6 @@ class Position:
 """ TOKENS"""
 #######################################
 
-
 TT_INT = 'INT'
 TT_FLOAT = 'FLOAT'
 TT_PLUS = 'PLUS'
@@ -107,6 +106,9 @@ TT_POW = 'POW'
 TT_LPAREN = 'LPAREN'
 TT_RPAREN = 'RPAREN'
 TT_EOF = 'EOF'
+TT_KEYWORD = 'KEYWORD'
+TT_IDENTIFIER = 'IDENTIFIER'
+TT_EQ = 'EQ'
 
 
 class Token:
