@@ -1,17 +1,17 @@
 poll for names 
 
-EchoCode                                              /  1
-RuneCode                                              /  1+1
-Myth#                                                 /  1+1
-Aurora                                                /  1+1+1
-CyberNode                                             /
-Nebula                                                /  1+1+1
-Synth+                                                /  1
-Serpent ( version nulle française de python)          /
-PrismCode                                             /  1
-Quest                                                 /  1+1+1+1 
-Muse                                                  /  1+1
-Arcane                                                /  1+1
+EchoCode                                            /  1
+RuneCode                                            /  1+1
+Myth#                                               /  1+1+1
+Aurora                                              /  1+1+1+1
+CyberNode                                           /
+Nebula                                              /  1+1+1
+Synth+                                              /  1
+Serpent ( version nulle française de python)        /
+PrismCode                                           /  1
+Quest                                               /  1+1+1+1+1 
+Muse                                                /  1+1
+Arcane                                              /  1+1
 
 
 
