@@ -9,8 +9,29 @@ Nebula                                                /  1+1+1
 Synth+                                                /  1
 Serpent ( version nulle française de python)          /
 PrismCode                                             /  1
-Quest                                                 /  1+1+1+1
-        BI ideas:
-        # 
+Quest                                                 /  1+1+1+1 
 Muse                                                  /  1+1
 Arcane                                                /  1+1
+
+
+
+
+
+
+
+######## Builtins ideas for Quest
+# beginJourney(): Initiates the program or a major process within your application.
+# findPath(): A function for searching algorithms or finding elements in data structures.
+# forgeItem(): Create or initialize a new variable or data structure.
+# encounter(): Function to handle events or interactions, possibly with user input or external data.
+# gatherLoot(): Function for collecting or aggregating data, similar to array or list aggregation functions.
+defeatChallenge(): A function for error handling or overcoming difficult tasks.
+# rest(): Pause the program or delay execution, akin to a sleep function.
+# unlockSecret(): Decrypt or reveal hidden information, useful for handling encrypted data or accessing restricted areas.
+# readMap(): Function to read from files or databases, interpreting the data as navigating a map.
+# lightTorch(): Function to illuminate or log information, aiding in debugging or providing insights into program execution.
+# choosePath(): A decision-making function, similar to if-else or switch-case structures.
+# speak(): Output information to the console or user interface, like a print or echo function.
+# castSpell(): Apply transformations or algorithms to data, invoking the idea of magical alteration.
+carryCompanion(): Import libraries or modules, suggesting the idea of companions joining the quest.
+# forgeAlliance(): Function for networking or API integration, symbolizing the forming of alliances.
