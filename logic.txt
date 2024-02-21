@@ -7,9 +7,13 @@ factor          : (PLUS|MINUS) factor
 power           : atom (POW factor)*
 atom            : INT|FLOAT|IDENTIFIER
                 : LPAREN expr RPAREN
+if-expr         : KEYWORD: IF expr KEYWORD: THEN expr
+                : KEYWORD: ELIF expr KEYWORD: THEN expr
+                : KEYWORD: ELSE expr 
 
 VAR variable_name = (expr)
 keyword identifier equals
+IF a == a THEN 'Yes it is' ELSE 'what the fuck'
 
 ####### input variables examples
 Dao > VAR a = 3
