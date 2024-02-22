@@ -131,8 +131,10 @@ KEYWORDS = [
     'NOT',
     'IF',
     'ELIF',
-    'ELSE',
-    'THEN'
+    'ELSE', 
+    'THEN', 
+    'FOR', 
+    'WHILE' 
 ]
 
 
