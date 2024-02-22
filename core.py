@@ -1,12 +1,12 @@
 #######################################
-# IMPORTS
+""" Implements the core of the language. """
 #######################################
 
 from highlight_error_location import *
 import string
 
 #######################################
-# CONSTANTS
+""" CONSTANTS FOR THE LANGUAGE """
 #######################################
 
 DIGITS = '0123456789'
@@ -14,7 +14,7 @@ LETTERS = string.ascii_letters
 LETTERS_DIGITS = LETTERS + DIGITS
 
 #######################################
-# ERRORS
+""" ERRORS MANAGEMENT FOR THE LANGUAGE"""
 #######################################
 
 
@@ -73,7 +73,10 @@ class RTError(Error):
         return 'Traceback (most recent call last):\n' + result
 
 #######################################
-# POSITION
+""" POSITION CLASS FOR THE LANGUAGE, 
+    TO KEEP TRACK OF THE POSITION OF THE 
+    CHARACTERS IN THE FILE 
+    (LINE NUMBER, COLUMN NUMBER, FILE NAME, FILE TEXT) """
 #######################################
 
 
@@ -99,7 +102,14 @@ class Position:
         return Position(self.idx, self.ln, self.col, self.fn, self.ftxt)
 
 #######################################
-# TOKENS
+""" TOKENS FOR THE LANGUAGE 
+    (INTEGER, FLOAT, IDENTIFIER, KEYWORD, OPERATORS, PARENTHESIS, EOF)
+    AND KEYWORDS 
+    (VAR, AND, OR, NOT, IF, ELIF, ELSE, THEN, FOR, WHILE) 
+    IT ALSO IMPLEMENTS THE TOKEN CLASS
+    TO KEEP TRACK OF THE TOKENS IN THE FILE
+    (TYPE, VALUE, POSITION START, POSITION END)
+    """
 #######################################
 
 
@@ -160,7 +170,11 @@ class Token:
         return f'{self.type}'
 
 #######################################
-# NODES
+""" LEXER CLASS FOR THE LANGUAGE 
+    TO IMPLEMENT THE LEXICAL ANALYSIS 
+    OF THE FILE
+    (GETTING THE TOKENS FROM THE FILE)
+    """
 #######################################
 
 
