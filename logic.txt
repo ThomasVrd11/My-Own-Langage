@@ -24,7 +24,6 @@ FOR <var_name> = <start_value> TO <end_value> THEN <expr>
 VAR result = 1
 FOR i = 0 TO 10 THEN result = result * i
 
-
 ####### input variables examples
 Dao > VAR a = 3
 3
@@ -42,6 +41,9 @@ Dao > e
 12
 Dao > l
 12
+Dao > 7 + 3 * (10 / (12 / (3 + 1) - 1)) / (2 + 3) - 5 - 3 + (8)                                                                      
+10.0
+
 ####### input comparisons examples 
 Dao > 4 == 4
 1
@@ -59,8 +61,8 @@ Dao > TRUE
 1
 Dao > FALSE
 0
-######## input IF examples
 
+######## input IF examples
 
 ################################# dao.py ###############################
 
