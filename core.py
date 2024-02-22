@@ -144,7 +144,9 @@ KEYWORDS = [
     'ELSE', 
     'THEN', 
     'FOR', 
-    'WHILE' 
+    'WHILE',
+    'TO',
+    'STEP' 
 ]
 
 

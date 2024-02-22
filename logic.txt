@@ -14,6 +14,10 @@ if-expr         : KEYWORD: IF expr KEYWORD: THEN expr
 VAR variable_name = (expr)
 keyword identifier equals
 IF a == a THEN 'Yes it is' ELSE 'what the fuck'
+FOR <var_name> = <start_value> TO <end_value> THEN <expr>
+VAR result = 1
+FOR i = 0 TO 10 THEN result = result * i
+
 
 ####### input variables examples
 Dao > VAR a = 3
