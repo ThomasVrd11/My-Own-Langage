@@ -11,7 +11,7 @@ Serpent ( version nulle française de python)        /
 PrismCode                                           /  1
 Quest                                               /  1+1+1+1+1 
 Muse                                                /  1+1
-Arcane                                              /  1+1
+Arcane                                              /  1+1+1
 
 
 
