@@ -1,12 +1,24 @@
 #######################################
-""" Implements the core of the language. """
+""" Implements the core of the language.
+    It includes the following:
+    - Constants for the language
+    - Errors management for the language
+    - Position class for the language
+    - Tokens for the language
+    - Lexer class for the language
+    - Nodes for the language
+    """
 #######################################
 
 from highlight_error_location import *
 import string
 
 #######################################
-""" CONSTANTS FOR THE LANGUAGE """
+""" CONSTANTS FOR THE LANGUAGE
+    (DIGITS, LETTERS, LETTERS_DIGITS)
+    TO KEEP TRACK OF THE CHARACTERS IN THE FILE
+    (DIGITS: 0-9, LETTERS: a-z, A-Z, LETTERS_DIGITS: a-z, A-Z, 0-9)
+    """
 #######################################
 
 DIGITS = '0123456789'
@@ -14,7 +26,12 @@ LETTERS = string.ascii_letters
 LETTERS_DIGITS = LETTERS + DIGITS
 
 #######################################
-""" ERRORS MANAGEMENT FOR THE LANGUAGE"""
+""" ERRORS MANAGEMENT FOR THE LANGUAGE
+    (ILLEGAL CHARACTER, EXPECTED CHARACTER, INVALID SYNTAX, RUNTIME ERROR)
+    IT ALSO IMPLEMENTS THE ERROR CLASS
+    TO KEEP TRACK OF THE ERRORS IN THE FILE
+    (POSITION START, POSITION END, ERROR NAME, DETAILS)
+    """
 #######################################
 
 
@@ -76,7 +93,8 @@ class RTError(Error):
 """ POSITION CLASS FOR THE LANGUAGE, 
     TO KEEP TRACK OF THE POSITION OF THE 
     CHARACTERS IN THE FILE 
-    (LINE NUMBER, COLUMN NUMBER, FILE NAME, FILE TEXT) """
+    (LINE NUMBER, COLUMN NUMBER, FILE NAME, FILE TEXT) 
+    """
 #######################################
 
 
