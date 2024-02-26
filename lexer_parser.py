@@ -2,7 +2,7 @@ from core import *
 from interpreter import *
 
 #######################################
-# LEXER
+# * LEXER Handles the tokenization of the input
 #######################################
 
 
@@ -145,9 +145,12 @@ class Lexer:
         return Token(tok_type, pos_start=pos_start, pos_end=self.pos)
 
 #######################################
-""" PARSE NODES FOR AST """
+# * PARSER Handles the parsing of the tokens
+    # * The parser is responsible for taking the tokens and turning them into an Abstract Syntax Tree (AST)
+    # * The AST is a tree-like structure that represents the syntax of the code
+    # * The parser is responsible for ensuring that the tokens are in the correct order and that the syntax is correct
+    # * The parser is also responsible for handling errors    
 #######################################
-
 
 class Parser:
     def __init__(self, tokens):
